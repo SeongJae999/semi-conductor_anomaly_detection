@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block page_meta %}
+  {% endblock %}
+
+  {% block vendor_css %}
+    <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/bootstrap.min.css' %}" />
+  {% endblock vendor_css %}
+
+
+
+  <title>My Website - {% block title %}{% endblock %}</title>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  {% include 'partials/_nav.html' %}
+
+  {{ form.image.errors }}
+<div class="fluid-container mx-2">
+    
+  {% block header %}
+    {% include 'partials/_header.html' %}
+  {% endblock header %}
+
+  {% if messages %}
+      {% for message in messages %}
+        <div class="message">
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" id="djangoMessage" role="alert">
+            {{ message }}
+            <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+              <span aria-hidden="true" id="messageDialogCloseBtn">&times;</span></button>       
+          </div>
+        </div>    
+      {% endfor %}
+    {% endif %}
+
+  <div class="row">
+    
+    {% block content %}
+        {# Page content will go here #}
+    {% endblock %}
+  </div>
+</div>  
+
+</body>
+</html>
