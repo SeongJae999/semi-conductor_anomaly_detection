@@ -1,0 +1,60 @@
+2024-05-06 19:52:13,622 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-05-06 19:52:17,411 WARNING django.server "GET /static/js/vendor/jquerry.js HTTP/1.1" 404 1920
+2024-05-06 19:52:17,415 WARNING django.server "GET /static/js/main.js HTTP/1.1" 404 1890
+2024-05-06 19:52:17,418 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:17,419 WARNING django.server "GET /static/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 404 1959
+2024-05-06 19:52:17,419 WARNING django.server "GET /static/js/lightbox_bs5.js HTTP/1.1" 404 1914
+2024-05-06 19:52:17,530 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:17,544 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:17,593 WARNING django.request Not Found: /images/20/imageset/WebExplain.vue.map
+2024-05-06 19:52:17,590 WARNING django.request Not Found: /images/20/imageset/WebSummary.vue.map
+2024-05-06 19:52:17,594 WARNING django.server "GET /images/20/imageset/WebSummary.vue.map HTTP/1.1" 404 11999
+2024-05-06 19:52:17,594 WARNING django.server "GET /images/20/imageset/WebExplain.vue.map HTTP/1.1" 404 11999
+2024-05-06 19:52:17,975 WARNING django.request Not Found: /images/20/imageset/WebSummary.vue.map
+2024-05-06 19:52:17,981 WARNING django.request Not Found: /images/20/imageset/WebExplain.vue.map
+2024-05-06 19:52:17,981 WARNING django.server "GET /images/20/imageset/WebSummary.vue.map HTTP/1.1" 404 11998
+2024-05-06 19:52:17,983 WARNING django.server "GET /images/20/imageset/WebExplain.vue.map HTTP/1.1" 404 11998
+2024-05-06 19:52:18,456 INFO django.server "GET /images/20/upload_images/ HTTP/1.1" 200 10138
+2024-05-06 19:52:18,535 WARNING django.server "GET /static/js/vendor/jquerry.js HTTP/1.1" 404 1920
+2024-05-06 19:52:18,544 WARNING django.server "GET /static/js/main.js HTTP/1.1" 404 1890
+2024-05-06 19:52:18,544 WARNING django.server "GET /static/js/lightbox_bs5.js HTTP/1.1" 404 1914
+2024-05-06 19:52:18,545 WARNING django.server "GET /static/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 404 1959
+2024-05-06 19:52:18,546 WARNING django.server "GET /static/js/vendor/popper.js HTTP/1.1" 404 1917
+2024-05-06 19:52:18,557 WARNING django.server "GET /static/js/site.js HTTP/1.1" 404 1890
+2024-05-06 19:52:18,568 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:18,636 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:18,653 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:18,674 WARNING django.request Not Found: /images/20/upload_images/WebSummary.vue.map
+2024-05-06 19:52:18,679 WARNING django.request Not Found: /images/20/upload_images/WebExplain.vue.map
+2024-05-06 19:52:18,680 WARNING django.server "GET /images/20/upload_images/WebSummary.vue.map HTTP/1.1" 404 12014
+2024-05-06 19:52:18,683 WARNING django.server "GET /images/20/upload_images/WebExplain.vue.map HTTP/1.1" 404 12014
+2024-05-06 19:52:19,062 WARNING django.request Not Found: /images/20/upload_images/github-markdown-css
+2024-05-06 19:52:19,063 WARNING django.server "GET /images/20/upload_images/github-markdown-css HTTP/1.1" 404 12016
+2024-05-06 19:52:19,153 WARNING django.request Not Found: /images/20/upload_images/WebExplain.vue.map
+2024-05-06 19:52:19,158 WARNING django.request Not Found: /images/20/upload_images/WebSummary.vue.map
+2024-05-06 19:52:19,158 WARNING django.server "GET /images/20/upload_images/WebExplain.vue.map HTTP/1.1" 404 12013
+2024-05-06 19:52:19,159 WARNING django.server "GET /images/20/upload_images/WebSummary.vue.map HTTP/1.1" 404 12013
+2024-05-06 19:52:22,365 ERROR django.request Internal Server Error: /images/20/upload_images/
+Traceback (most recent call last):
+  File "C:\Users\user\miniconda3\envs\env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\user\miniconda3\envs\env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\user\miniconda3\envs\env\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\user\miniconda3\envs\env\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\user\miniconda3\envs\env\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\mango\semi-conductor_anomaly_detection\apps\images\views.py", line 84, in post
+    if not ImageFile.objects.filter(name=img.name, image_set=imageset).exists():
+AttributeError: 'NoneType' object has no attribute 'name'
+2024-05-06 19:52:22,400 ERROR django.server "POST /images/20/upload_images/ HTTP/1.1" 500 22301
+2024-05-06 19:52:42,219 WARNING django.request Not Found: /images/20/upload_images/github-markdown-css
+2024-05-06 19:52:42,220 WARNING django.server "GET /images/20/upload_images/github-markdown-css HTTP/1.1" 404 12016
+2024-05-06 19:52:42,280 WARNING django.server "GET /static/css/vendor/bootstrap.min.css.map HTTP/1.1" 404 1956
+2024-05-06 19:52:42,353 WARNING django.request Not Found: /images/20/upload_images/WebExplain.vue.map
+2024-05-06 19:52:42,357 WARNING django.server "GET /images/20/upload_images/WebExplain.vue.map HTTP/1.1" 404 12013
+2024-05-06 19:52:42,361 WARNING django.request Not Found: /images/20/upload_images/WebSummary.vue.map
+2024-05-06 19:52:42,362 WARNING django.server "GET /images/20/upload_images/WebSummary.vue.map HTTP/1.1" 404 12013
+2024-05-06 19:57:52,877 INFO django.utils.autoreload C:\mango\semi-conductor_anomaly_detection\config\settings\base.py changed, reloading.

@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from django.core.exceptions import ImproperlyConfigured
+
 from pathlib import Path
+
 import sys
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -22,8 +26,19 @@ sys.path.append(str(BASE_DIR / "apps"))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+with open(BASE_DIR / "config/settings/secrets.json", "r") as f:
+    secrets = json.loads(f.read())
+    
+def get_secret(setting):
+    """Get the secret variable or return explicit exception."""
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = f"Set the {setting} secret variable"
+        raise ImproperlyConfigured(error_msg)
+    
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-96w1ss0b&aryu0=$5$nf)by7y0!93m(@j19&z@-exp05q-p24n'
+SECRET_KEY = get_secret("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,13 +58,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Project Apps
-    
+    'dashboard',
     'images',
+    'modelmanager',
     'users',
     
     #### Third Party Apps #####
     'crispy_forms',
     'crispy_bootstrap4',
+    'django_cleanup.apps.CleanupConfig',    
 ]
 
 MIDDLEWARE = [
@@ -89,7 +106,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -122,7 +139,9 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
+
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -133,6 +152,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -142,7 +164,15 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/'
 
-LOGIN_URL = '/'
+LOGIN_URL = '/users/login/'
 
+# Celery settings
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_BACKEND = 'django-cache'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Celery Configuration Options
+CELERY_TIMEZONE = 'Asia/Seoul'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' 

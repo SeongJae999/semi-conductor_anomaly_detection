@@ -7,8 +7,8 @@
 {% block content %}
 <div class="col-md-12 mt-2">
     <div class="card">
-    <h4 class="card-header">반도체 이상 탐지</h4>
     <div class="card-body">
+
         <ul class="list-group list-group-flush">
             <li class="list-group-item">이미지 업로드: 
                 <a href="{% url 'images:imageset_create_url' %}" class="btn btn-sm btn-outline-success" type="button">Create Imageset</a>
@@ -17,10 +17,10 @@
                 {% endif %}
             </li>
             <li class="list-group-item">AI 모델 조회: 
-                
+                <a href="{% url 'modelmanager:public_mlmodel_list_url' %}" class="btn btn-sm btn-outline-success" type="button">모델 목록</a>
             </li>
             <li class="list-group-item">Dashboard:
-                
+                <a href="{% url 'dashboard:dashboard_url' %}" class="btn btn-sm btn-outline-success" type="button">Dashboard</a>
             </li>
         </ul>
     </div>

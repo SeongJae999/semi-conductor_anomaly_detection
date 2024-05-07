@@ -25,10 +25,18 @@ from . import views
 urlpatterns = [
     path('', views.HomeTemplateView.as_view(), name="home_url"),
     path('admin/', admin.site.urls),
+    path('dashboard/', include("dashboard.urls", namespace="dashboard")),
     path('images/', include("images.urls", namespace="images")),
+    path('modelmanager/', include("modelmanager.urls", namespace='modelmanager')),
     path('users/', include("users.urls", namespace='users')),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
     urlpatterns += [
