@@ -39,7 +39,7 @@ class InferencedImage(CreationModificationDateBase):
                                   blank=True,
                                   choices=AIMODEL_CHOICES,
                                   default=AIMODEL_CHOICES[0],
-                                  help_text="Selected yolo model will download. \
+                                  help_text="Selected AI model will download. \
                                  Requires an active internet connection."
                                   )
     

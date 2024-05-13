@@ -28,17 +28,8 @@
                         <a href="{{ img_qs.get_imageurl }}" data-toggle="lightbox" data-gallery="image-gallery">
                             <img src="{{ img_qs.get_imageurl }}" class="border border-2 border-primary rounded mb-4" width="250" height="auto" />
                         </a>
-                        <div class="">
-                            Image shape: {{ img_qs.get_imgshape }}
-
-                        </div>
                     </div>
                     <div class="col-sm-7">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-yolo-tab" data-bs-toggle="tab" data-bs-target="#nav-yolo" type="button" role="tab" aria-controls="nav-yolo" aria-selected="true">Yolo Model</button>
-                            </div>
-                        </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-yolo" role="tabpanel" aria-labelledby="nav-yolo-tab" tabindex="0">
                                 <form class="mt-2 mb-2" action="" method="POST">
