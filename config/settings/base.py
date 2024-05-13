@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     
     # Project Apps
     'dashboard',
+    'detectobj',
     'images',
     'modelmanager',
     'users',
@@ -155,6 +156,8 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+MODEL_CONFIDENCE = 0.45
+PAGINATE_DETECTION_IMAGES_NUM = 25
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

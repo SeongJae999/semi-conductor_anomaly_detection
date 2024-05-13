@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.HomeTemplateView.as_view(), name="home_url"),
     path('admin/', admin.site.urls),
     path('dashboard/', include("dashboard.urls", namespace="dashboard")),
+    path('detectobj/', include("detectobj.urls", namespace="detectobj")),
     path('images/', include("images.urls", namespace="images")),
     path('modelmanager/', include("modelmanager.urls", namespace='modelmanager')),
     path('users/', include("users.urls", namespace='users')),
