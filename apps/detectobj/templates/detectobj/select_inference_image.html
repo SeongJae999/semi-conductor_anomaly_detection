@@ -4,7 +4,12 @@
 
 
 {% block on_page_css %}
-  <link href="{% static 'css/ekko-lightbox.css' %}" rel="stylesheet">
+    <style>{
+        font-family: 'Do Hyeon', sans-serif;
+        }
+    </style>
+    <link href="{% static 'css/ekko-lightbox.css' %}" rel="stylesheet">
+    <link href="{% static 'css/showstyle.css' %}" rel="stylesheet">
 {% endblock on_page_css %}
 
 {% block title %}
@@ -19,6 +24,7 @@
 
 
 {% block content %}
+
     <div class='col-sm-9 my-2' id='main-div'>
         <div class="card">
             <div class="card-body">
@@ -43,63 +49,36 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-sm-12">
-                        {% if inf_img_qs %}
-                            <h3 class="cart-title">inferenced Image 
-                            <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                Show Results
-                            </button>
-                            </h3>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    {% if inf_img_qs.detection_info|length > 0 %}
-                                        <h5 class="cart-title text-muted">Objects detected : 
-                                        <span class="text-success">{{ inf_img_qs.detection_info|length }}</span></h5>
-                                        <hr>
-                                        <h5 class="cart-title text-muted">Objects Occurrances {{ results_counter }}</h5> 
-                                        <hr>
-                                        {{ inf_img_qs.detection_info }}
-                                        {% for result in inf_img_qs.detection_info %}
-                                            {% for k, v in result.items %}
-                                                {{ k }} : {{ v }}<br>
-                                            {% endfor %}
-                                            <hr>
-                                        {% endfor %}
-                                    {% else %}
-                                        Model Unable to predict. Try another model.
-                                    {% endif %}
-                                </div>
-                            </div>
-                                inferenced image with model conf {{ inf_img_qs.model_conf }}
-                                <img src="{{ inf_img_qs.inf_image_path }}" alt="" class="img-fluid px-4 py-4"  width="100%" height="auto"/>
-                        {% endif %}
-                            {% if inferenced_img_dir %}
-                                <h3 class="cart-title">inferenced Image 
-                                    <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        Show Results
-                                    </button>
-                                </h3>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                {% if results_list|length > 0 %}
-                                <h5 class="cart-title text-muted">Objects detected : 
-                                <span class="text-success">{{ results_list|length }}</span></h5>
-                                <hr>
-                                <h5 class="cart-title text-muted">Objects Occurrances {{ results_counter }}</h5> 
-                                <hr>
-                                    {% for result in results_list %}
-                                        {% for k, v in result.items %}
-                                            {{ k }} : {{ v }}<br>
-                                        {% endfor %}
-                                        <hr>
-                                    {% endfor %}
-                                {% else %}
-                                        Model Unable to predict. Try another model.
-                                {% endif %}
-                                </div>
-                            </div>
-                                <img src="{{inferenced_img_dir}}" alt="" class="img-fluid px-4 py-4"  width="120%" height="auto"/>
-                            {% endif %}
+                    <div id="text-center" class="col-sm-12">
+                        <div class="leftpage">
+                            <h3>테스트결과</h3>
+                            {% for img in page_obj %}
+                                <a href="{% url 'detectobj:detection_image_detail_url' img.id %}">
+                                    <img src="{{ img.get_imageurl }}" class= "img-fluid" width=auto height=auto/>
+                                </a>
+                            {% endfor %}
+                            <h4 id="count">1/{{files|length}}</h4>  
+                        </div>
+                        <div class="filetitle">
+                            <h3> 파일명 </h3>
+                            <h4 id="imgname">{{files.0}}</h4>   <!--첫페이지 파일명 불러오기-->
+                          </div>
+                  
+                          <div class="resultpage">
+                            <h3> 검사 결과 : </h3>
+                            <h4 id="resultlabel">{{pf.0}}</h4>    <!--첫페이지 결과값 불러오기-->
+                          </div>
+                  
+                          <div class="defectlist">
+                            <h3> 결함 종류 : <h3>
+                            <h4 id="defect">{{resultlist.0}}</h4>
+                          </div>
+                  
+                          <div class="rate">
+                            <h3> 수율 : {{rate}}</h3>
+                            <h4 id="ratelabel">({{correct}} / {{datanum}})</h4>    <!--첫페이지 결과값 불러오기-->
+                          </div>
+                        </div>
                     </div>
                 </div>
             </div>

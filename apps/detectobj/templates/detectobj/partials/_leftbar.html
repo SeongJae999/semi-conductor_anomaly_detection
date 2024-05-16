@@ -20,10 +20,10 @@
                 {% endfor %}
             {% else %}
                 <a href="{% url 'detectobj:detection_image_detail_url' img.id %}">
-                <img src="{{ img.get_imageurl }}" class="{% if img.id == img_qs.id %}
-                border border-4 border-info rounded {% endif %} 
-                {% if img.is_inferenced %} border border-2 border-success {% endif %}
-                image-fluid ml-1 mb-1" width=90 height=auto/>
+                    <img src="{{ img.get_imageurl }}" class="{% if img.id == img_qs.id %}
+                    border border-4 border-info rounded {% endif %} 
+                    {% if img.is_inferenced %} border border-2 border-success {% endif %}
+                    image-fluid ml-1 mb-1" width=90 height=auto/>
                 </a>
           {% endif %}
         {% endfor %}
