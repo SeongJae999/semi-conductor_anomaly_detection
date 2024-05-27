@@ -22,7 +22,6 @@
     </div>
 {% endblock leftbar %}
 
-
 {% block content %}
 
     <div class='col-sm-9 my-2' id='main-div'>
@@ -50,35 +49,81 @@
                 <hr>
                 <div class="row">
                     <div id="text-center" class="col-sm-12">
-                        <div class="leftpage">
-                            <h3>테스트결과</h3>
-                            {% for img in page_obj %}
-                                <a href="{% url 'detectobj:detection_image_detail_url' img.id %}">
-                                    <img src="{{ img.get_imageurl }}" class= "img-fluid" width=auto height=auto/>
-                                </a>
-                            {% endfor %}
-                            <h4 id="count">1/{{files|length}}</h4>  
-                        </div>
-                        <div class="filetitle">
-                            <h3> 파일명 </h3>
-                            <h4 id="imgname">{{files.0}}</h4>   <!--첫페이지 파일명 불러오기-->
-                          </div>
-                  
-                          <div class="resultpage">
-                            <h3> 검사 결과 : </h3>
-                            <h4 id="resultlabel">{{pf.0}}</h4>    <!--첫페이지 결과값 불러오기-->
-                          </div>
-                  
-                          <div class="defectlist">
-                            <h3> 결함 종류 : <h3>
-                            <h4 id="defect">{{resultlist.0}}</h4>
-                          </div>
-                  
-                          <div class="rate">
-                            <h3> 수율 : {{rate}}</h3>
-                            <h4 id="ratelabel">({{correct}} / {{datanum}})</h4>    <!--첫페이지 결과값 불러오기-->
-                          </div>
-                        </div>
+                        {% if inf_img_qs %}
+                            <div class="card card-body">
+                                {% for img in page_obj %}
+                                    <div class="leftpage">
+                                        <h3>테스트결과</h3>
+                                        <img src="{{ img.get_imageurl }}" class= "img-fluid" width=auto height=auto/>
+                                        <h4 id="count">1/{{files|length}}</h4>  
+                                    </div>
+                                    <div class="filetitle">
+                                        <h3> 파일명 </h3>
+                                        <h4 id="imgname">{{ img.name }}</h4>   <!--첫페이지 파일명 불러오기-->
+                                    </div>
+                            
+                                    <div class="resultpage">
+                                        <h3> 검사 결과 : </h3>
+                                        <h4 id="resultlabel">{{pf.0}}</h4>    <!--첫페이지 결과값 불러오기-->
+                                    </div>
+                            
+                                    <div class="defectlist">
+                                        <h3> 결함 종류 : <h3>
+                                        <h4 id="defect">{{resultlist.0}}</h4>
+                                    </div>
+                            
+                                    <div class="rate">
+                                        <h3> 수율 : {{rate}}</h3>
+                                        <h4 id="ratelabel">({{correct}} / {{datanum}})</h4>    <!--첫페이지 결과값 불러오기-->
+                                    </div>
+
+                                    <div class="buttoncon">
+                                        <p>
+                                        <button class="button" onclick="changePic(0);">이전</button>    <!--버튼-->
+                                        <button class="button" onclick="changePic(1);">다음</button>
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                            {% if inferenced_img_dir %}
+                                <div class="card card-body">
+                                    <div class="leftpage">
+                                        <h3>테스트결과</h3>
+                                        {% for img in page_obj %}
+                                            <img src="{{ img.get_imageurl }}" class= "img-fluid" width=auto height=auto/>
+                                            <h4 id="imgname">{{ files.0 }}</h4>
+                                        {% endfor %}
+                                        <h4 id="count">1/{{files|length}}</h4>  
+                                    </div>
+                                    <div class="filetitle">
+                                        <h3> 파일명 </h3>
+                                        <h4 id="imgname">{{files.0}}</h4>   <!--첫페이지 파일명 불러오기-->
+                                    </div>
+                            
+                                    <div class="resultpage">
+                                        <h3> 검사 결과 : </h3>
+                                        <h4 id="resultlabel">{{pf.0}}</h4>    <!--첫페이지 결과값 불러오기-->
+                                    </div>
+                            
+                                    <div class="defectlist">
+                                        <h3> 결함 종류 : <h3>
+                                        <h4 id="defect">{{resultlist.0}}</h4>
+                                    </div>
+                            
+                                    <div class="rate">
+                                        <h3> 수율 : {{rate}}</h3>
+                                        <h4 id="ratelabel">({{correct}} / {{datanum}})</h4>    <!--첫페이지 결과값 불러오기-->
+                                    </div>
+
+                                    <div class="buttoncon">
+                                        <p>
+                                        <button class="button" onclick="changePic(0);">이전</button>    <!--버튼-->
+                                        <button class="button" onclick="changePic(1);">다음</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endif %}
                     </div>
                 </div>
             </div>

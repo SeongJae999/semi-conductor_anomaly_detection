@@ -8,4 +8,8 @@ urlpatterns = [
          views.InferencedImageDetectionView.as_view(),
          name="detection_image_detail_url"
          ),
+    path("<int:pk>/image_result/",
+         views.InferencedImageResultView.as_view(),
+         name="detection_image_result"
+         ),
 ]
