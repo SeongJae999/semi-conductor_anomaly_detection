@@ -9,6 +9,8 @@ from .forms import InferencedImageForm, AIModelForm
 from .models import InferencedImage
 from ast import literal_eval
 from images.models import ImageFile
+from keras import optimizers
+from keras.models import model_from_json
 from modelmanager.models import MLModel
 from PIL import Image as I
 
@@ -81,6 +83,13 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
         img = I.open(io.BytesIO(img_bytes))
         
         ai_model_name = self.request.POST.get("ai_model")
+        
+        json_file = open("C:/mango/vgg16.json", "r")
+        loaded_json_model = json_file.read()
+        json_file.close()
+        loaded_model = model_from_json(loaded_json_model)
+        loaded_model.load_weight("C:/mango/vgg16_model.h5")
+        loaded_model.compile(loss='categorical_crossentropy', optimizer=optimizers.Adam(learning_rate=0.001), metrics=['accuracy'])
         
         model = VGG16(weight='imagenet')
         results = model(img, size=640)
