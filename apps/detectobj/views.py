@@ -16,6 +16,7 @@ from PIL import Image as I
 
 import collections
 import io
+import numpy as np
 import os
 import tensorflow as tf
 
@@ -77,6 +78,17 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
         )
         context["page_obj"] = page_obj
 
+    def test_data_preprocessing():
+        x_test = x_test.reshape((-1, 27, 27, 1))
+        
+        # One-hot-Encoding 
+        nx_test = np.zeros((len(x_test), 27, 27, 3))
+
+        for w in range(len(x_test)):
+            for i in range(27):
+                for j in range(27):
+                    nx_test[w, i, j, int(x_test[w, i, j])] = 1
+                    
     def post(self, request, *args, **kwargs):
         img_qs = self.get_object()
         img_bytes = img_qs.image.read()
@@ -84,15 +96,16 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
         
         ai_model_name = self.request.POST.get("ai_model")
         
-        json_file = open("C:/mango/vgg16.json", "r")
+        json_file = open("vgg16.json", "r")
         loaded_json_model = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_json_model)
-        loaded_model.load_weight("C:/mango/vgg16_model.h5")
+        loaded_model.load_weights("vgg16_model.h5")
         loaded_model.compile(loss='categorical_crossentropy', optimizer=optimizers.Adam(learning_rate=0.001), metrics=['accuracy'])
         
-        model = VGG16(weight='imagenet')
-        results = model(img, size=640)
+        data = test_data_preprocessing()
+        
+        results = loaded_model
         results_list = results.pandas().xyxy[0].to_json(orient="records")
         results_list = literal_eval(results_list)
         classes_list = [item["name"] for item in results_list]
