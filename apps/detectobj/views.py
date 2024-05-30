@@ -6,6 +6,8 @@ from django.shortcuts import render
 from django.views.generic.detail import DetailView
 
 from .forms import InferencedImageForm, AIModelForm
+from keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
 from .models import InferencedImage
 from ast import literal_eval
 from images.models import ImageFile
@@ -18,6 +20,7 @@ import collections
 import io
 import numpy as np
 import os
+import pandas as pd
 import tensorflow as tf
 
 from flask import render_template
@@ -78,7 +81,88 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
         )
         context["page_obj"] = page_obj
 
-    def test_data_preprocessing():
+    #wafer map dimension initialize
+    def find_dim(self, x):
+        dim0=np.size(x,axis=0)
+        dim1=np.size(x,axis=1)
+        return dim0,dim1
+
+    def test_data_preprocessing(self):
+        df = pd.read_pickle("C:\mango\LSWMD.pkl")
+        df = df.drop(['waferIndex'], axis = 1)
+        df['waferMapDim']=df.waferMap.apply(self.find_dim)
+        df['failureNum']=df.failureType
+        df['trainTestNum']=df.trianTestLabel
+        
+        mapping_type={'Center':0,'Donut':1,'Edge-Loc':2,'Edge-Ring':3,'Loc':4,'Random':5,'Scratch':6,'Near-full':7,'none':8}
+        mapping_traintest={'Training':0,'Test':1}
+        df = df.replace({'failureNum':mapping_type, 'trainTestNum':mapping_traintest})
+        
+        x_test = x_test.reshape((-1, 27, 27, 1))
+        
+        sub_df = df.loc[df['waferMapDim'] == (25, 27)]
+
+        sw = np.ones((1, 25, 27))
+        label = list()
+
+        for i in range(len(sub_df)):
+            if len(sub_df.iloc[i,:]['failureType']) == 0:
+                continue
+            sw = np.concatenate((sw, sub_df.iloc[i,:]['waferMap'].reshape(1, 25, 27)))
+            label.append(sub_df.iloc[i,:]['failureType'][0][0])
+            
+        x1 = sw[1:]
+        # 27 x 27 사이즈로 맞추기 위한 padding 처리
+        x = np.pad(x1, ((0,0),(1,1),(0,0)), mode='constant', constant_values = (0,0))
+        y = np.array(label).reshape((-1,1))    
+        
+        sub_df1 = df.loc[df['waferMapDim'] == (26, 26)]
+
+        sw1 = np.ones((1, 26, 26))
+        label1 = list()
+
+        for i in range(len(sub_df1)):
+            if len(sub_df1.iloc[i,:]['failureType']) == 0:
+                continue
+            sw1 = np.concatenate((sw1, sub_df1.iloc[i,:]['waferMap'].reshape(1, 26, 26)))
+            label1.append(sub_df1.iloc[i,:]['failureType'][0][0])
+            
+        x2 = sw1[1:]
+        x3 = np.pad(x2, ((0,0),(1,0),(1,0)), mode='constant', constant_values = (0,0))
+        y2 = np.array(label1).reshape((-1,1))
+        
+        sub_df2 = df.loc[df['waferMapDim'] == (27, 25)]
+
+        sw2 = np.ones((1, 27, 25))
+        label2= list()
+
+        for i in range(len(sub_df2)):
+            if len(sub_df2.iloc[i,:]['failureType']) == 0:
+                continue
+            sw2 = np.concatenate((sw2, sub_df2.iloc[i,:]['waferMap'].reshape(1, 27, 25)))
+            label2.append(sub_df2.iloc[i,:]['failureType'][0][0])
+
+        x4 = sw2[1:]
+        x5 = np.pad(x4, ((0,0),(0,0),(1,1)), mode='constant', constant_values = (0,0))
+        y3 = np.array(label2).reshape((-1,1))
+        
+        x3 = np.concatenate((x3, x5[0:]))
+        y2 = np.concatenate((y2, y3))
+        
+        x = np.concatenate((x, x3[0:]))
+        y = np.concatenate((y, y2))
+        
+        faulty_case = np.unique(y)
+        
+        # '감지되지 않는' none 불량 라벨 제거
+        none_idx = np.where(y=='none')[0][np.random.choice(len(np.where(y=='none')[0]), size=25000, replace=False)]
+        new_x = np.delete(x, none_idx, axis=0)
+        new_y = np.delete(y, none_idx, axis=0)
+        
+        #train과 test 데이터를 8:2 비율로 맞춤
+        x_train_temp, x_test, y_train_temp, y_test = train_test_split(new_x, new_y, test_size=0.2, random_state=789)    
+        
+        #x_test : 채널 추가
         x_test = x_test.reshape((-1, 27, 27, 1))
         
         # One-hot-Encoding 
@@ -88,6 +172,20 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
             for i in range(27):
                 for j in range(27):
                     nx_test[w, i, j, int(x_test[w, i, j])] = 1
+                    
+        #y_test : 문자열 데이터를 정수형으로 형변환
+        for i, l in enumerate(faulty_case):
+            y_test[y_test==l] = i
+            
+        # one-hot-encoding - 10진 정수 형식을 2진 바이너리 형식으로 변경
+        y_test = to_categorical(y_test)
+
+        for w in range(len(x_test)):
+            for i in range(27):
+                for j in range(27):
+                    nx_test[w, i, j, int(x_test[w, i, j])] = 1
+            
+        return nx_test, y_test, faulty_case
                     
     def post(self, request, *args, **kwargs):
         img_qs = self.get_object()
@@ -103,40 +201,21 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
         loaded_model.load_weights("vgg16_model.h5")
         loaded_model.compile(loss='categorical_crossentropy', optimizer=optimizers.Adam(learning_rate=0.001), metrics=['accuracy'])
         
-        data = test_data_preprocessing()
+        x_data, y_data, faulty_case = self.test_data_preprocessing()
         
-        results = loaded_model
-        results_list = results.pandas().xyxy[0].to_json(orient="records")
-        results_list = literal_eval(results_list)
-        classes_list = [item["name"] for item in results_list]
-        results_counter = collections.Counter(classes_list)
+        vy_pred = loaded_model.predict(x_data)
+        
+        vy_test_decode = np.ones(len(y_data))
+        vy_pred_decode = np.ones(len(vy_pred))
 
-        results.render()
-        
-        data = results.pandas().xyxy[0][['name']].values.tolist()
-        pf=[]
-        
-        if len(data) == 0:
-            pf.append("PASS")    # data 리스트의 값이 0이면 양품으로 pass
-        if len(data) != 0:
-            pf.append("FAIL")  
-        
-        media_folder = settings.MEDIA_ROOT
-        inferenced_img_dir = os.path.join(
-            media_folder, "inferenced_image")
-        if not os.path.exists(inferenced_img_dir):
-            os.makedirs(inferenced_img_dir)
-            
-        for img in results.ims:
-            img_base64 = I.fromarray(img)
-            img_base64.save(
-                f"{inferenced_img_dir}/{img_qs}", format="PNG")
+        for i in range(len(vy_pred)):
+            vy_pred_decode[i] = np.argmax(vy_pred[i])
+            vy_test_decode[i] = np.argmax(y_data[i])
         
         inf_img_qs, created = InferencedImage.objects.get_or_create(
             orig_image=img_qs,
             inf_image_path=f"{settings.MEDIA_URL}inferenced_image/{img_qs.name}",
         )
-        inf_img_qs.detection_info = results_list
     
         inf_img_qs.ai_model = ai_model_name
         inf_img_qs.save()
@@ -147,41 +226,12 @@ class InferencedImageDetectionView(LoginRequiredMixin, DetailView):
         # Ready for rendering next image on same html page.
         imgset = img_qs.image_set
         images_qs = imgset.images.all()
-        
-
-        resultlist=[]
-        for file in file:
-            
-            root = "static/aft"
-            if not os.path.isdir(root):      #파일명 리스트로 저장
-                return "Error : not found!"
-            files = []
-            for file in glob.glob("{}/*.*".format(root)):
-                fname = file.split(os.sep)[-1]
-                files.append(fname)
-            print("파일스 :",files)
-            
-            if len(files)>0:
-                firstimage = "static/aft/"+files[0]
-            else: pass
-
-            datanum = len(pf)
-            rate = round(pf.count('PASS') / len(pf), 3)
-            correct = pf.count('PASS')
             
         # For pagination POST request
         context = {}
         self.get_pagination(context, images_qs)
-        context["files"] = files
-        context["resultlist"] = resultlist
-        context["pf"] = pf
-        context["datanum"] = datanum
-        context["rate"] = rate
-        context["correct"] = correct
-        context["firstimage"] = firstimage
         context["enumerate"] = enumerate
         context["len"] = len
-        context["results_list"] = results_list
         context["img_qs"] = False
         context["inferenced_img_dir"] = f"{settings.MEDIA_URL}inferenced_image/{img_qs}"
         context["form1"] = AIModelForm()
