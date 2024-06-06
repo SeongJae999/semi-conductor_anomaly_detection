@@ -4,12 +4,7 @@
 
 
 {% block on_page_css %}
-    <style>{
-        font-family: 'Do Hyeon', sans-serif;
-        }
-    </style>
-    <link href="{% static 'css/ekko-lightbox.css' %}" rel="stylesheet">
-    <link href="{% static 'css/showstyle.css' %}" rel="stylesheet">
+  <link href="{% static 'css/ekko-lightbox.css' %}" rel="stylesheet">
 {% endblock on_page_css %}
 
 {% block title %}
@@ -22,8 +17,8 @@
     </div>
 {% endblock leftbar %}
 
-{% block content %}
 
+{% block content %}
     <div class='col-sm-9 my-2' id='main-div'>
         <div class="card">
             <div class="card-body">
@@ -33,8 +28,18 @@
                         <a href="{{ img_qs.get_imageurl }}" data-toggle="lightbox" data-gallery="image-gallery">
                             <img src="{{ img_qs.get_imageurl }}" class="border border-2 border-primary rounded mb-4" width="250" height="auto" />
                         </a>
+                        <div class="">
+                            Image shape: {{ img_qs.get_imgshape }}
+
+                        </div>
                     </div>
                     <div class="col-sm-7">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-yolo-tab" data-bs-toggle="tab" data-bs-target="#nav-yolo" type="button" role="tab" aria-controls="nav-yolo" aria-selected="true">Yolo Model</button>
+                                <button class="nav-link" id="nav-custom-tab" data-bs-toggle="tab" data-bs-target="#nav-custom" type="button" role="tab" aria-controls="nav-custom" aria-selected="false">Custom Model</button>
+                            </div>
+                        </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-yolo" role="tabpanel" aria-labelledby="nav-yolo-tab" tabindex="0">
                                 <form class="mt-2 mb-2" action="" method="POST">
@@ -43,86 +48,43 @@
                                     <button type="submit" class="btn btn-outline-info btn-sm">Start detection</button>
                                 </form>
                             </div>
+                            <div class="tab-pane fade" id="nav-custom" role="tabpanel" aria-labelledby="nav-custom-tab" tabindex="0">
+                                <form class="mt-2 mb-2" action="" method="POST">
+                                    {% csrf_token %}
+                                    {{ form2|crispy }}
+                                    <button type="submit" class="btn btn-outline-info btn-sm">Start detection</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <div id="text-center" class="col-sm-12">
-                        {% if inf_img_qs %}
-                            <div class="card card-body">
-                                {% for img in page_obj %}
-                                    <div class="leftpage">
-                                        <h3>테스트결과</h3>
-                                        <img src="{{ img.get_imageurl }}" class= "img-fluid" width=auto height=auto/>
-                                        <h4 id="count">1/{{files|length}}</h4>  
-                                    </div>
-                                    <div class="filetitle">
-                                        <h3> 파일명 </h3>
-                                        <h4 id="imgname">{{ img.name }}</h4>   <!--첫페이지 파일명 불러오기-->
-                                    </div>
-                            
-                                    <div class="resultpage">
-                                        <h3> 검사 결과 : </h3>
-                                        <h4 id="resultlabel">{{pf.0}}</h4>    <!--첫페이지 결과값 불러오기-->
-                                    </div>
-                            
-                                    <div class="defectlist">
-                                        <h3> 결함 종류 : <h3>
-                                        <h4 id="defect">{{resultlist.0}}</h4>
-                                    </div>
-                            
-                                    <div class="rate">
-                                        <h3> 수율 : {{rate}}</h3>
-                                        <h4 id="ratelabel">({{correct}} / {{datanum}})</h4>    <!--첫페이지 결과값 불러오기-->
-                                    </div>
-
-                                    <div class="buttoncon">
-                                        <p>
-                                        <button class="button" onclick="changePic(0);">이전</button>    <!--버튼-->
-                                        <button class="button" onclick="changePic(1);">다음</button>
-                                        </p>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                            {% if inferenced_img_dir %}
+                    <div class="col-sm-12">
+                        {% if inferenced_img_dir %}
+                                <h3 class="cart-title">inferenced Image 
+                                    <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        Show Resultss
+                                    </button>
+                                </h3>
+                            <div class="collapse" id="collapseExample">
                                 <div class="card card-body">
-                                    <div class="leftpage">
-                                        <h3>테스트결과</h3>
-                                        {% for img in page_obj %}
-                                            <img src="{{ img.get_imageurl }}" class= "img-fluid" width=auto height=auto/>
-                                            <h4 id="imgname">{{ files.0 }}</h4>
-                                        {% endfor %}
-                                        <h4 id="count">1/{{files|length}}</h4>  
-                                    </div>
-                                    <div class="filetitle">
-                                        <h3> 파일명 </h3>
-                                        <h4 id="imgname">{{files.0}}</h4>   <!--첫페이지 파일명 불러오기-->
-                                    </div>
-                            
-                                    <div class="resultpage">
-                                        <h3> 검사 결과 : </h3>
-                                        <h4 id="resultlabel">{{pf.0}}</h4>    <!--첫페이지 결과값 불러오기-->
-                                    </div>
-                            
-                                    <div class="defectlist">
-                                        <h3> 결함 종류 : <h3>
-                                        <h4 id="defect">{{resultlist.0}}</h4>
-                                    </div>
-                            
-                                    <div class="rate">
-                                        <h3> 수율 : {{rate}}</h3>
-                                        <h4 id="ratelabel">({{correct}} / {{datanum}})</h4>    <!--첫페이지 결과값 불러오기-->
-                                    </div>
-
-                                    <div class="buttoncon">
-                                        <p>
-                                        <button class="button" onclick="changePic(0);">이전</button>    <!--버튼-->
-                                        <button class="button" onclick="changePic(1);">다음</button>
-                                        </p>
-                                    </div>
+                                {% if results_list|length > 0 %}
+                                <h5 class="cart-title text-muted"> 파일 이름 : 
+                                <span class="text-success">img001.png</span></h5>
+                                <hr>
+                                <h5 class="cart-title text-muted"> 검사 결과 : 
+                                <span class="text-success">Fail</span></h5>
+                                <hr>
+                                <h5 class="cart-title text-muted"> 불량 유형 : 
+                                <span class="text-success">Loc</span></h5>
+                                <hr>
+                                {% else %}
+                                        Model Unable to predict. Try another modelx.
+                                {% endif %}
                                 </div>
+                            </div>
+                                <img src="{{inferenced_img_dir}}" alt="" class="img-fluid px-4 py-4"  width="120%" height="auto"/>
                             {% endif %}
                     </div>
                 </div>
@@ -135,5 +97,3 @@
 {% block on_page_script %}
 <script src="{% static 'js/ekko-lightbox.js' %}"></script>
 {% endblock on_page_script %}
-
-

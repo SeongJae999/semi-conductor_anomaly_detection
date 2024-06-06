@@ -30,6 +30,7 @@ class InferencedImage(CreationModificationDateBase):
     detection_info = models.JSONField(null=True, blank=True)
     
     AIMODEL_CHOICES = [
+         ('yolov5s.pt', 'yolov5s.pt'),
         ('vggnet.pt','vggnet.pt'),
     ]
     

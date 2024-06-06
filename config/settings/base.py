@@ -14,6 +14,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 from pathlib import Path
 
+import os
 import sys
 import json
 
@@ -156,6 +157,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+YOLOV5_ROOTDIR = os.path.join(BASE_DIR, 'yolov5')
+YOLOV5_WEIGTHS_DIR = os.path.join(YOLOV5_ROOTDIR, 'weights')
+if not os.path.exists(YOLOV5_WEIGTHS_DIR):
+    os.makedirs(YOLOV5_WEIGTHS_DIR)
+    
 MODEL_CONFIDENCE = 0.45
 PAGINATE_DETECTION_IMAGES_NUM = 25
 # Default primary key field type
