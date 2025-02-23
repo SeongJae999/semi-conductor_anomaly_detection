@@ -15,7 +15,7 @@
     d. 전문가 의존도가 높음 : 시스템 구축 및 운영에 전문 지식이 필요하다.   
   * 딥러닝 기반 반도체 이상 탐지 프로그램은 이러한 한계를 극복하기 위해 개발하기 시작되었다.
  <br>
-
+ 
  # 개발 계획 
  a. 데이터 수집 및 전처리 :
   * 반도체 생산 공정에서 휙득한 이미지 데이터를 수집한다.
@@ -44,6 +44,15 @@ d. 웹 구축 및 평가
 
 15주차 – 불량 유형 인식 못하거나 결과 화면이 나오지 않는 문제점 보완.
 
+# 기술 스택
+<img src="https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white">
+<img src="https://img.shields.io/badge/keras-D00000?style=for-the-badge&logo=keras&logoColor=white">
+<img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+<br>
+
+## AI models
+VGG16, ResNet50, EfficientB0
+
 # 프로젝트 구조
 > 프로젝트 전체 구조도
 ![image](https://github.com/user-attachments/assets/6ec73f6d-d981-4a1f-b705-9c956d1ff605)
@@ -52,4 +61,5 @@ d. 웹 구축 및 평가
 > 프로젝트 AI 구조도
 ![image](https://github.com/user-attachments/assets/806e3ff2-9a06-4054-a2e5-e51572d94e9a)
 <br>
-  
+
+# 
