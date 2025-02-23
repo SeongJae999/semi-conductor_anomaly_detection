@@ -57,12 +57,15 @@ d. 웹 구축 및 평가
 </div>
 <br>
 
-* AI models  
-<strong>VGG16, ResNet50, EfficientB0</strong>
+* AI models
+<div>
+  <strong>VGG16, ResNet50, EfficientB0</strong>
+</div>
 </br>
 
 # 데이터셋
 > [MIR-WM811K](http://mirlab.org/dataSet/public/)
+<br>
 
 # 프로젝트 구조
 > 프로젝트 전체 구조도
