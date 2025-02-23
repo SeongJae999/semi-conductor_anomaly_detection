@@ -85,6 +85,7 @@ d. 웹 구축 및 평가
   * 결측치 제거
     > 데이터셋(LSWMD.pkl)의 info  
     ![image](https://github.com/user-attachments/assets/6bc6238e-a2db-4e3a-b31b-0b4a952619d6)
+    
     IEEE에서 제공한 WM-811k wafer map에 대한 데이터 세트로 811,457개의 waferMap과 wafer die size, lot Name 및 wafer index와 같은
     추가 정보로 구성되어 있다.
 
