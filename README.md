@@ -64,4 +64,41 @@ VGG16, ResNet50, EfficientB0
 ![image](https://github.com/user-attachments/assets/806e3ff2-9a06-4054-a2e5-e51572d94e9a)
 <br>
 
-# 
+# 기대 효과
+- 불량률 감소: AI 기반 이상 탐지 시스템은 인간보다 높은 정확도로 결함을 탐지하여 제품 불량률을 크게 줄일 수 있다. 이는 생산 비용 감소와 수익 증대에 직접적인 영향을 미친다. 
+
+ - 생산량 증대: 불량 제품 생산을 줄임으로써 생산량을 증대시킬 수 있다. 특히, 고수익 제품의 경우 생산량 증대는 수익에 큰 영향을 미칠 수 있다.  
+
+ - 생산 속도 향상: AI 시스템은 실시간으로 대량의 데이터를 처리하여 이상을 빠르게 탐지할 수 있다. 이는 생산 공정의 속도를 높이고 생산성을 향상시킬 수 있다.
+<br>
+
+# Reference
+[1]  Confusion Matrix, Sharp Sight,
+https://www.sharpsightlabs.com/blog/sklearn-confusion_matrix-explained/
+
+[2] VGGNet, 혁펜하임 AI & 딥러닝 강의, https://www.youtube.com/watch?v=TzKJ-Ucyh_I/
+
+[3] Jongkuk Lim, https://www.youtube.com/watch?v=MaDakbMDBrI/
+
+[4] Insight Mountain, https://dlaguddnr.tistory.com/15/
+
+[5] wikidocs, https://wikidocs.net/164796/
+
+[6] Read the Docs,
+https://oi.readthedocs.io/en/latest/computer_vision/cnn/vggnet.html/ 
+
+[7] ResNet: Deep Residual Learning for Image Recognition,
+https://www.youtube.com/watch?v=671BsKl8d0E/
+
+[8] EfficientNet, https://www.youtube.com/watch?v=uLKqMbOA_vU/
+
+[9] EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks
+https://www.youtube.com/watch?v=Vhz0quyvR7I/
+
+[10] Image classification via fine tuning with EfficientNet
+https://www.youtube.com/watch?v=ArlkLCJKW54/
+
+[11] Dacon, EfficientNet, https://dacon.io/forum/406054/
+
+[12] Keras 3 API documentation / Keras Applications / EfficientNet B0 to B7
+https://keras.io/api/applications/efficientnet/
