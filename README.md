@@ -45,9 +45,8 @@ d. 웹 구축 및 평가
 15주차 – 불량 유형 인식 못하거나 결과 화면이 나오지 않는 문제점 보완.
 
 # 프로젝트 구조도
+  > 프로젝트 전체 구조도
   <img src=https://github.com/user-attachments/assets/a88cd921-35b4-4016-8e31-f54fff99d599>
-  <details>
-   <summary>이미지 보</summary>
-  </details>
+  > 프로젝트 AI 구조도
   <img src=https://github.com/user-attachments/assets/7e86c250-cb3f-45a6-ab6f-a1a094f551e8>
   
