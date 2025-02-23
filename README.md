@@ -125,7 +125,6 @@ d. 웹 구축 및 평가
   VGG16모델과 ResNet50 모델은 정규화된 오차 행렬을 나타내고 있다. Donut 유형을 예측했을 때 Donut이 아닌 값을 예측하는 FN(False Negative)를 나타낸다.
   
   EfficientNetB0 모델도 Donut 유형을 예측했을 때 Donut이 아닌 값을 예측하는 FN(False Negative)가 나타나는 걸 미루어 볼 때, 데이터셋 load 혹은 전처리 과정에서 donut 유형의 값이 깨진게 아닌지 추측해본다.
-  
 <br>
 
 # 웨이퍼 불량 검출 과정
@@ -154,7 +153,7 @@ d. 웹 구축 및 평가
 
   Start detection 버튼을 누를 시, 해당 이미지의 파일 이름과, Pass / Fail 로 나뉘는 검사 결과(해당 이미지가 정상이라면 불량 유형은 나오지 않고 검사 결과는 Pass로 나온다.),
   불량 유형은 Edge-Ring, Edge-Local, Center, Local, Scratch, Random, Donut, Near-Full로 총 8가지중 한가지로 도출된다.
-  <br>
+<br>
 
 # 기대 효과
 - 불량률 감소: AI 기반 이상 탐지 시스템은 인간보다 높은 정확도로 결함을 탐지하여 제품 불량률을 크게 줄일 수 있다. 이는 생산 비용 감소와 수익 증대에 직접적인 영향을 미친다. 
