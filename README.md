@@ -80,7 +80,7 @@ d. 웹 구축 및 평가
 ![image](https://github.com/user-attachments/assets/806e3ff2-9a06-4054-a2e5-e51572d94e9a)
 <br>
 
-# 프로젝트 결과
+# 전처리 및 AI 모델 학습 및 평가
 * 전처리 방식
   * 결측치 제거
     > 데이터셋(LSWMD.pkl)의 info  
@@ -105,6 +105,26 @@ d. 웹 구축 및 평가
 
    d. Convolutional AutoEncoder  
    ![image](https://github.com/user-attachments/assets/780c22a3-7731-4f56-a3ec-c86c111fa04a)
+
+* AI 모델 학습 및 평가
+  * VGG16
+    > VGG16 Confusion Matrix
+    ![image](https://github.com/user-attachments/assets/16c0fcce-53b7-4dd3-a914-39d4e29c2b0e)
+    
+  * ResNet50
+    > ResNet50 Confusion Matrix
+    ![image](https://github.com/user-attachments/assets/b9e48da3-4a0c-431b-8a8f-0badfc8ec6e2)
+
+  * EfficientNetB0
+    > EfficientNetB0 Confusion Matrix
+    ![image](https://github.com/user-attachments/assets/3f0fa82d-9433-4c87-be63-db0135e26798)
+
+  Confusion Matrix (오차행렬)은 학습된 분류 모델이 예측을 수행하면서 얼마나 헷갈려(confused)하고 있는지 보여주는 지표이다.
+  즉, 이진 분류의 예측 오류가 얼마인지 와 더불어 어떤 유형의 예측 오류가 발생하고 있는지를 함게 나타내는 지표이다.
+
+  VGG16모델과 ResNet50 모델은 정규화된 오차 행렬을 나타내고 있다. Donut 유형을 예측했을 때 Donut이 아닌 값을 예측하는 FN(False Negative)를 나타낸다.
+  EfficientNetB0 모델도 Donut 유형을 예측했을 때 Donut이 아닌 값을 예측하는 FN(False Negative)가 나타나는 걸 미루어 볼 때, 데이터셋 load 혹은 전처리 과정에서 donut 유형의 값이 깨진게 아닌지 추측해본다.
+  
 <br>
 
 # 기대 효과
