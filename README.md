@@ -53,7 +53,7 @@ d. 웹 구축 및 평가
 
 ## AI models
 VGG16, ResNet50, EfficientB0
-<br>
+</br>
 
 # 프로젝트 구조
 > 프로젝트 전체 구조도
