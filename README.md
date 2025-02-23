@@ -50,14 +50,14 @@ d. 웹 구축 및 평가
 
 # 기술 스택
 * Tools
-<div align="center">
+<div>
   <img src="https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white">
   <img src="https://img.shields.io/badge/keras-D00000?style=for-the-badge&logo=keras&logoColor=white">
   <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
 </div>
 <br>
 
-* AI models
+* AI models  
 <strong>VGG16, ResNet50, EfficientB0</strong>
 </br>
 
