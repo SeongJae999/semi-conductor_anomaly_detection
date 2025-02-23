@@ -123,9 +123,38 @@ d. 웹 구축 및 평가
   즉, 이진 분류의 예측 오류가 얼마인지 와 더불어 어떤 유형의 예측 오류가 발생하고 있는지를 함게 나타내는 지표이다.
 
   VGG16모델과 ResNet50 모델은 정규화된 오차 행렬을 나타내고 있다. Donut 유형을 예측했을 때 Donut이 아닌 값을 예측하는 FN(False Negative)를 나타낸다.
+  
   EfficientNetB0 모델도 Donut 유형을 예측했을 때 Donut이 아닌 값을 예측하는 FN(False Negative)가 나타나는 걸 미루어 볼 때, 데이터셋 load 혹은 전처리 과정에서 donut 유형의 값이 깨진게 아닌지 추측해본다.
   
 <br>
+
+# 웨이퍼 불량 검출 과정
+* 메인 화면 
+  > 메인 화면 UI  
+  ![image](https://github.com/user-attachments/assets/e81552d1-4a85-457b-b89c-c0d1cf1b9980)
+
+  이미지 업로드에는 업로드하기 위한 이미지들과 해당 이미지셋에 대한 설명을 저장할 수 있는 Create Imageset 버튼과 사용자가 만들었던 이미지셋을 확인 가능한 My ImageSet List 버튼이 있다.
+
+  AI 모델 조회에 모델 목록 버튼은 해당 연구에 사용되는 VGGNet, ResNet, EfficientNet 에 대한 설명을 확인 가능하다. 또한 Dashboard는 사용자 정보를 확인 가능하다.
+
+* 이미지 셋 제작 및 업로드  
+  > Create ImageSet  
+  ![image](https://github.com/user-attachments/assets/8fd8f22d-abe0-4433-96da-7dddda543ab2)
+  
+  > Upload Image  
+  ![image](https://github.com/user-attachments/assets/34259a7a-5aac-42da-8880-f79e3470cb90)
+
+  메인 화면에서 Create ImageSet 버튼을 누르면 먼저 이름과 해당 이미지 셋에 대한 설명을 적을 수 있는 화면이 나오며 그 이후에 드래그 앤 드롭 혹은 클릭 후 파일 업로드로 이미지를 업로드로 최종 결과화면 전 불량 검출을 위한 이미지를 업로드 할 수 있다.
+
+* 최종 결과 화면  
+  > 결과 화면 UI  
+  ![image](https://github.com/user-attachments/assets/1af42a69-5441-4d11-8fff-3b2b308eaf5a)
+
+  이미지 업로드 후에 왼쪽 네비게이터 바에서 업로드한 이미지들 확인할 수 있고 해당 이미지에 적용하고 싶은 AI Model을 적용할 수 있는데 본 연구에서는 VGGNet, ResNet, EfficientNet의 가중치를 적용한 모델을 활용해서 진행하였다.
+
+  Start detection 버튼을 누를 시, 해당 이미지의 파일 이름과, Pass / Fail 로 나뉘는 검사 결과(해당 이미지가 정상이라면 불량 유형은 나오지 않고 검사 결과는 Pass로 나온다.),
+  불량 유형은 Edge-Ring, Edge-Local, Center, Local, Scratch, Random, Donut, Near-Full로 총 8가지중 한가지로 도출된다.
+  <br>
 
 # 기대 효과
 - 불량률 감소: AI 기반 이상 탐지 시스템은 인간보다 높은 정확도로 결함을 탐지하여 제품 불량률을 크게 줄일 수 있다. 이는 생산 비용 감소와 수익 증대에 직접적인 영향을 미친다. 
