@@ -84,8 +84,8 @@ d. 웹 구축 및 평가
 * 전처리 방식
   * 결측치 제거
     > 데이터셋(LSWMD.pkl)의 info
-    ![image](https://github.com/user-attachments/assets/1f619163-0a48-4207-9ff8-a0d944d4ea4c)
-
+    ![image](https://github.com/user-attachments/assets/6bc6238e-a2db-4e3a-b31b-0b4a952619d6)
+    > 
 <br>
 
 # 기대 효과
