@@ -148,7 +148,7 @@ d. 웹 구축 및 평가
 
 * 최종 결과 화면  
   > 결과 화면 UI  
-  ![image](https://github.com/user-attachments/assets/1af42a69-5441-4d11-8fff-3b2b308eaf5a)
+  ![image](https://github.com/user-attachments/assets/b47b08ee-06f0-4d4a-b1fc-e1c7c255ed68)  
 
   이미지 업로드 후에 왼쪽 네비게이터 바에서 업로드한 이미지들 확인할 수 있고 해당 이미지에 적용하고 싶은 AI Model을 적용할 수 있는데 본 연구에서는 VGGNet, ResNet, EfficientNet의 가중치를 적용한 모델을 활용해서 진행하였다.
 
