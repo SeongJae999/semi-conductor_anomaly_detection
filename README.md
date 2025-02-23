@@ -89,8 +89,12 @@ d. 웹 구축 및 평가
     IEEE에서 제공한 WM-811k wafer map에 대한 데이터 세트로 811,457개의 waferMap과 wafer die size, lot Name 및 wafer index와 같은
     추가 정보로 구성되어 있다.
 
+    > Failure Type 분포도
+    ![image](https://github.com/user-attachments/assets/45e1ef39-b83c-441e-8205-111714c0b587)
+
     FaiureType이 ‘Center’,‘Donout’,‘Edge-Loc’,‘Edge-Ring’,‘Loc’,‘Random’,‘Scratch’,‘Near-full’,‘none’으로 구성되어 있고
-    trainTestLabel은 ‘Training’ 과 ‘Test’로 나뉘어져 있다. 
+    trainTestLabel은 ‘Training’ 과 ‘Test’로 나뉘어져 있다.
+
 <br>
 
 # 기대 효과
