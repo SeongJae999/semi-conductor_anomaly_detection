@@ -50,10 +50,10 @@ d. 웹 구축 및 평가
   <img src="https://img.shields.io/badge/keras-D00000?style=for-the-badge&logo=keras&logoColor=white">
   <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
 </div>
-<br>
 
 ## AI models
 VGG16, ResNet50, EfficientB0
+<br>
 
 # 프로젝트 구조
 > 프로젝트 전체 구조도
