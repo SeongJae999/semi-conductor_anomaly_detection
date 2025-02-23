@@ -1,6 +1,6 @@
 # :microscope: 반도체 이상 탐지 프로그램 :microscope:
 <p align="center">
- ![art_16402553889115_bd67b4](https://github.com/user-attachments/assets/3e579722-8422-4e49-9876-10d7e4262eab)
+ <img src=https://github.com/user-attachments/assets/3e579722-8422-4e49-9876-10d7e4262eab>
 </p>
 <br>
 
