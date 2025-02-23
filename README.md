@@ -62,8 +62,7 @@ d. 웹 구축 및 평가
 </br>
 
 # 데이터셋
-> MIR-WM811K
-[MIR-WM811K](http://mirlab.org/dataSet/public/)
+> [MIR-WM811K](http://mirlab.org/dataSet/public/)
 
 # 프로젝트 구조
 > 프로젝트 전체 구조도
