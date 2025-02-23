@@ -95,14 +95,14 @@ d. 웹 구축 및 평가
     FaiureType이 ‘Center’,‘Donout’,‘Edge-Loc’,‘Edge-Ring’,‘Loc’,‘Random’,‘Scratch’,‘Near-full’,‘none’으로 구성되어 있고
     trainTestLabel은 ‘Training’ 과 ‘Test’로 나뉘어져 있다.
     
- * 데이터 증강(Data Augmentation)
+ * 데이터 증강(Data Augmentation)  
    a. 결측치 제거로 인한 훈련 데이터가 부족한 현상으로 인해, 기존 데이터 세트의 데이터를 인위적으로 변형하거나 수정하여 새로운 데이터를 만드는 기술인 데이터 증강이 필요하다.  
 
-   b. 27 x 27 wafer map
+   b. 27 x 27 wafer map  
 
-   c. One-hot-Encoding
+   c. One-hot-Encoding  
 
-   d. Convolutional AutoEncoder
+   d. Convolutional AutoEncoder  
    ![image](https://github.com/user-attachments/assets/780c22a3-7731-4f56-a3ec-c86c111fa04a)
 <br>
 
