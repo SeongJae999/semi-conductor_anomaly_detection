@@ -47,7 +47,7 @@ d. 웹 구축 및 평가
 # 프로젝트 구조
 <p style="text-align: center;">
   <img src="https://github.com/user-attachments/assets/a88cd921-35b4-4016-8e31-f54fff99d599" alt="프로젝트 전체 구조도" style="display: block; margin: auto;">
-  [프로젝트 전체 구조도]
+  <strong>[프로젝트 전체 구조도]</strong>
 </p>
 <br>
   <img src=https://github.com/user-attachments/assets/806e3ff2-9a06-4054-a2e5-e51572d94e9a>
