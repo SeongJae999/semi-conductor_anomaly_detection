@@ -107,16 +107,16 @@ d. 웹 구축 및 평가
    ![image](https://github.com/user-attachments/assets/780c22a3-7731-4f56-a3ec-c86c111fa04a)
 
 * AI 모델 학습 및 평가
-  * VGG16
-    > VGG16 Confusion Matrix
+  * VGG16  
+    > VGG16 Confusion Matrix  
     ![image](https://github.com/user-attachments/assets/16c0fcce-53b7-4dd3-a914-39d4e29c2b0e)
     
-  * ResNet50
-    > ResNet50 Confusion Matrix
+  * ResNet50  
+    > ResNet50 Confusion Matrix  
     ![image](https://github.com/user-attachments/assets/b9e48da3-4a0c-431b-8a8f-0badfc8ec6e2)
 
-  * EfficientNetB0
-    > EfficientNetB0 Confusion Matrix
+  * EfficientNetB0  
+    > EfficientNetB0 Confusion Matrix  
     ![image](https://github.com/user-attachments/assets/3f0fa82d-9433-4c87-be63-db0135e26798)
 
   Confusion Matrix (오차행렬)은 학습된 분류 모델이 예측을 수행하면서 얼마나 헷갈려(confused)하고 있는지 보여주는 지표이다.
